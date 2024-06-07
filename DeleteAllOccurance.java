@@ -1,6 +1,4 @@
-import java.util.*;
-
-public class FindPairsInDLL {
+public class DeleteAllOccurance {
     public static class Node {
         int data;
         Node next;
@@ -53,43 +51,34 @@ public class FindPairsInDLL {
         System.out.println("null");
     }
 
-    public ArrayList<ArrayList<Integer>> findSumPair(Node head, int target) {
-        Node tail = head;
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        while (tail.next != null) {
-            tail = tail.next;
+    public static Node deletAllOcc(Node head, int x) {
+        while(head != null && head.data == x) {
+           head = head.next;
         }
-            while (head != tail) {
-                if (head.data + tail.data == target) {
-                    ArrayList<Integer> pairs = new ArrayList<>();
-                    pairs.add(head.data);
-                    pairs.add(tail.data);
-                    ans.add(pairs);
-                    tail= tail.prev;
-                } else if(head.data + tail.data > target) {
-                    tail = tail.prev;
-                } else {
-                    head = head.next;
-                }
+        if(head == null) {
+            return null;
+        }
+        Node curr = head;
+        while (curr != null && curr.next != null) {
+            if (curr.next.data == x) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
             }
-        return ans;
+        }
+        return head;
     }
 
     public static void main(String[] args) {
-        FindPairsInDLL dll = new FindPairsInDLL();
+        DeleteAllOccurance dll = new DeleteAllOccurance();
         dll.addLast(1);
+        dll.addLast(2);
         dll.addLast(2);
         dll.addLast(3);
         dll.addLast(4);
-        dll.addLast(5);
-        dll.addLast(6);
-        dll.addLast(7);
-        dll.addLast(8);
-        dll.addLast(9);
-        int target = 7;
-        ArrayList<ArrayList<Integer>> pairs = dll.findSumPair(dll.head, target);
-        for (ArrayList<Integer> pair : pairs) {
-            System.out.println("(" + pair.get(0) + ", " + pair.get(1) + ")");
-        }
+        dll.print();
+        int x = 2;
+        head = deletAllOcc(head, x);
+        dll.print();
     }
 }
