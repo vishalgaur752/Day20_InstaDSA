@@ -53,13 +53,14 @@ public class RemoveDuplicates {
     }
 
     public static Node removeDuplicates(Node head) {
-        if (head == null) {
+        if(head == null) {
+            System.out.println("dll is empty");
             return head;
         }
         Node prev = head;
         Node curr = head.next;
-        while (curr != null) {
-            if (prev.data == curr.data) {
+        while(curr != null) {
+            if(prev.data == curr.data) {
                 prev.next = curr.next;
                 curr = curr.next;
             } else {
