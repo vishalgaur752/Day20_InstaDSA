@@ -62,6 +62,9 @@ public class RemoveDuplicates {
         while(curr != null) {
             if(prev.data == curr.data) {
                 prev.next = curr.next;
+                if (curr.next != null) {
+                    curr.next.prev = prev;
+                }
                 curr = curr.next;
             } else {
                 prev = curr;
